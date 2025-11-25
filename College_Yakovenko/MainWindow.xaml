@@ -1,0 +1,42 @@
+﻿<Window x:Class="College_Yakovenko.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:College_Yakovenko"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <Grid Background="LightYellow">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Name="AddGroupPage" Grid.Column="0" Grid.Row="1" Content="Добавить группу"  Click="AddGroupPage_Click"></Button>
+                    <Button Name="AddActivityPage" Grid.Column="0" Grid.Row="3" Content="Добавить активность" Click="AddActivityPage_Click"></Button>
+                    <Button Name="JournalPage" Grid.Column="0" Grid.Row="5" Content="Учёт"  Click="JournalPage_Click"></Button>
+                    <Button Name="Report1Page" Grid.Column="0" Grid.Row="7" Content="Отчёт 1" Click="Report1Page_Click"></Button>
+                    <Button Name="Report2Page" Grid.Column="0" Grid.Row="9" Content="Отчёт 2" Click="Report2Page_Click"></Button>
+                </Grid>
+                <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"></Frame>
+                
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

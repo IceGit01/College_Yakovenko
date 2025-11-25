@@ -1,0 +1,57 @@
+﻿<Page x:Class="College_Yakovenko.View.Pages.JournalPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:College_Yakovenko.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="JournalPage">
+
+    <Grid Background="LightYellow">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.ColumnSpan="3" Name="JournalLv" Grid.Column="0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding DateEvent, StringFormat=dd.MM.yyyy}"/>
+                    <GridViewColumn Header="Группа" DisplayMemberBinding="{Binding Group.Name}"/>
+                    <GridViewColumn Header="Специальность" DisplayMemberBinding="{Binding Group.Special.Name}"/>
+                    <GridViewColumn Header="Активность" DisplayMemberBinding="{Binding Activity.Name}"/>
+                    <GridViewColumn Header="Направление" DisplayMemberBinding="{Binding Activity.Direction.Name}"/>
+                    <GridViewColumn Header="Балл" DisplayMemberBinding="{Binding Mark}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <TextBlock Grid.Row="2" Text="Выберите дату" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DatePicker Name="DateEventDp" Grid.Row="2" Grid.Column="2" />
+        <TextBlock Grid.Row="3" Text="Выберите специальность" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+        <TextBlock Grid.Row="3" Grid.Column="2" Text="Выберите направление" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+        <ComboBox Name="SpecialCmb"  Grid.Row="4"  Margin="5"/>
+        <ComboBox Name="DirectionlCmb"  Grid.Row="4" Grid.Column="2" Margin="5"/>
+        <TextBlock Grid.Row="5" Text="Выберите группу" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <ComboBox Name="GrouplCmb"  Grid.Row="6" Margin="5"/>
+        <TextBlock Grid.Row="5" Grid.Column="2" Text="Выберите активность" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <ComboBox Name="ActivitylCmb"  Grid.Row="6" Margin="5" Grid.Column="2"/>
+        <TextBlock Grid.Row="7" Text="Введите балл" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Name="MarkTb"/>
+        <Button Name="AddBtn" Grid.Row="7" Grid.Column="2" Content="Добавить" Margin="5" Click="AddBtn_Click"/>
+    </Grid>
+</Page>

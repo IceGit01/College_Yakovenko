@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище College_Yakovenko_KuularModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_Direction" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Direction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_Special" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Journal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Date_event" Type="date" Nullable="false" />
+          <Property Name="id_Group" Type="int" Nullable="false" />
+          <Property Name="id_Activity" Type="int" Nullable="false" />
+          <Property Name="Mark" Type="decimal" Precision="3" Scale="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Special">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "College_Yakovenko_Kuular.dbo.View_1" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="View_1">
+          <Key>
+            <PropertyRef Name="Date_event" />
+            <PropertyRef Name="Mark" />
+            <PropertyRef Name="id_Group" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Date_event" Type="date" Nullable="false" />
+          <Property Name="Mark" Type="decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="id_Group" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Activity_Direction1">
+          <End Role="Direction" Type="Self.Direction" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direction">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="id_Direction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Special1">
+          <End Role="Special" Type="Self.Special" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Special">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="id_Special" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Journal_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Journal_Group1">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="id_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище College_Yakovenko_KuularModelContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direction" EntityType="Self.Direction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Journal" EntityType="Self.Journal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Special" EntityType="Self.Special" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_1" EntityType="Self.View_1" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[View_1].[Date_event] AS [Date_event], 
+[View_1].[Mark] AS [Mark], 
+[View_1].[id_Group] AS [id_Group], 
+[View_1].[Name] AS [Name], 
+[View_1].[id] AS [id]
+FROM [dbo].[View_1] AS [View_1]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Activity_Direction1" Association="Self.FK_Activity_Direction1">
+            <End Role="Direction" EntitySet="Direction" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Special1" Association="Self.FK_Group_Special1">
+            <End Role="Special" EntitySet="Special" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Journal_Activity" Association="Self.FK_Journal_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Journal" EntitySet="Journal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Journal_Group1" Association="Self.FK_Journal_Group1">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Journal" EntitySet="Journal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="College_Yakovenko_KuularModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="College_Yakovenko_KuularEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activity" EntityType="College_Yakovenko_KuularModel.Activity" />
+          <EntitySet Name="Direction" EntityType="College_Yakovenko_KuularModel.Direction" />
+          <EntitySet Name="Group" EntityType="College_Yakovenko_KuularModel.Group" />
+          <EntitySet Name="Journal" EntityType="College_Yakovenko_KuularModel.Journal" />
+          <EntitySet Name="Special" EntityType="College_Yakovenko_KuularModel.Special" />
+          <EntitySet Name="View_1" EntityType="College_Yakovenko_KuularModel.View_1" />
+          <AssociationSet Name="FK_Activity_Direction1" Association="College_Yakovenko_KuularModel.FK_Activity_Direction1">
+            <End Role="Direction" EntitySet="Direction" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Journal_Activity" Association="College_Yakovenko_KuularModel.FK_Journal_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Journal" EntitySet="Journal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Special1" Association="College_Yakovenko_KuularModel.FK_Group_Special1">
+            <End Role="Special" EntitySet="Special" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Journal_Group1" Association="College_Yakovenko_KuularModel.FK_Journal_Group1">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Journal" EntitySet="Journal" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_Direction" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Direction" Relationship="College_Yakovenko_KuularModel.FK_Activity_Direction1" FromRole="Activity" ToRole="Direction" />
+          <NavigationProperty Name="Journal" Relationship="College_Yakovenko_KuularModel.FK_Journal_Activity" FromRole="Activity" ToRole="Journal" />
+        </EntityType>
+        <EntityType Name="Direction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Activity" Relationship="College_Yakovenko_KuularModel.FK_Activity_Direction1" FromRole="Direction" ToRole="Activity" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_Special" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Special" Relationship="College_Yakovenko_KuularModel.FK_Group_Special1" FromRole="Group" ToRole="Special" />
+          <NavigationProperty Name="Journal" Relationship="College_Yakovenko_KuularModel.FK_Journal_Group1" FromRole="Group" ToRole="Journal" />
+        </EntityType>
+        <EntityType Name="Journal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Date_event" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_Group" Type="Int32" Nullable="false" />
+          <Property Name="id_Activity" Type="Int32" Nullable="false" />
+          <Property Name="Mark" Type="Decimal" Nullable="false" Precision="3" Scale="1" />
+          <NavigationProperty Name="Activity" Relationship="College_Yakovenko_KuularModel.FK_Journal_Activity" FromRole="Journal" ToRole="Activity" />
+          <NavigationProperty Name="Group" Relationship="College_Yakovenko_KuularModel.FK_Journal_Group1" FromRole="Journal" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="Special">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Group" Relationship="College_Yakovenko_KuularModel.FK_Group_Special1" FromRole="Special" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="View_1">
+          <Key>
+            <PropertyRef Name="Date_event" />
+            <PropertyRef Name="Mark" />
+            <PropertyRef Name="id_Group" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Date_event" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Mark" Type="Decimal" Nullable="false" Precision="3" Scale="1" />
+          <Property Name="id_Group" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Activity_Direction1">
+          <End Type="College_Yakovenko_KuularModel.Direction" Role="Direction" Multiplicity="1" />
+          <End Type="College_Yakovenko_KuularModel.Activity" Role="Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direction">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="id_Direction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Journal_Activity">
+          <End Type="College_Yakovenko_KuularModel.Activity" Role="Activity" Multiplicity="1" />
+          <End Type="College_Yakovenko_KuularModel.Journal" Role="Journal" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Special1">
+          <End Type="College_Yakovenko_KuularModel.Special" Role="Special" Multiplicity="1" />
+          <End Type="College_Yakovenko_KuularModel.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Special">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="id_Special" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Journal_Group1">
+          <End Type="College_Yakovenko_KuularModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="College_Yakovenko_KuularModel.Journal" Role="Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="id_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище College_Yakovenko_KuularModelContainer" CdmEntityContainer="College_Yakovenko_KuularEntities">
+          <EntitySetMapping Name="Activity">
+            <EntityTypeMapping TypeName="College_Yakovenko_KuularModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="id_Direction" ColumnName="id_Direction" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direction">
+            <EntityTypeMapping TypeName="College_Yakovenko_KuularModel.Direction">
+              <MappingFragment StoreEntitySet="Direction">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group">
+            <EntityTypeMapping TypeName="College_Yakovenko_KuularModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="id_Special" ColumnName="id_Special" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Journal">
+            <EntityTypeMapping TypeName="College_Yakovenko_KuularModel.Journal">
+              <MappingFragment StoreEntitySet="Journal">
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="id_Activity" ColumnName="id_Activity" />
+                <ScalarProperty Name="id_Group" ColumnName="id_Group" />
+                <ScalarProperty Name="Date_event" ColumnName="Date_event" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Special">
+            <EntityTypeMapping TypeName="College_Yakovenko_KuularModel.Special">
+              <MappingFragment StoreEntitySet="Special">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_1">
+            <EntityTypeMapping TypeName="College_Yakovenko_KuularModel.View_1">
+              <MappingFragment StoreEntitySet="View_1">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id_Group" ColumnName="id_Group" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Date_event" ColumnName="Date_event" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

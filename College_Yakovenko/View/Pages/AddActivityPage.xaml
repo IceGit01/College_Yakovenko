@@ -1,0 +1,33 @@
+﻿<Page x:Class="College_Yakovenko.View.Pages.AddActivityPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:College_Yakovenko.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddActivityPage">
+
+    <Grid Background="LightYellow">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="45"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock  Grid.Row="1" Text="Введите активность" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock  Grid.Row="3" Text="Выберите направление" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="ActivityTb" Grid.Row="1" Grid.Column="2"/>
+        <ComboBox Name="OrientationCmb" Grid.Row="3" Grid.Column="2"/>
+        <Button Name="Add1Tb" Click="Add1Tb_Click"  Grid.Row="6" Grid.Column="2" Content="Добавить" FontSize="15"/>
+    </Grid>
+</Page>
